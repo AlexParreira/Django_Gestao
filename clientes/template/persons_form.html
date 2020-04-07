@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+
+{% block title %}page{% endblock %}
+
+{% block main %}
+
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form }}
-        <button type="submit">Salvar</button>
+        {{ form | bootstrap }}
+        <button type="submit" class="btn btn-success btn btn-block">Salvar</button>
     </form>
-</body>
-</html>
+
+{% endblock %}

@@ -1,22 +1,43 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h3>Olá {{ user.username }} ! </h3>
-<a href="{% url 'logout' %}">Sair</a>
-<ul>
-    {% for person in persons %}
+{% extends 'base.html' %}
 
-    <li>
-        <a>{{ person.first_name }}</a>
-        <a href="{% url 'persons_update' person.id %}">Editar</a>
-        <a href="{% url 'persons_delete' person.id %}">Deletar</a>
-    </li>
+{% block title %}Login page{% endblock %}
 
-    {% endfor %}
-</ul>
-<a href="{% url 'persons_new' %}">Novo cliente</a>
-</body>
-</html>
+{% block main %}
+    <div class="person">
+        <div class="alert alert-success" role="alert">
+            <a class="hello">Bem vindo, {{ user.username }}!</a>
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link active" href='{% url 'logout' %}'><small>Logout</small> </a>
+                </li>
+            </ul>
+        </div>
+        <button class="btn btn-success fas fa-user-edit" onclick="location.href='{% url 'persons_new' %}'">Novo cliente
+        </button>
+
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col" class="bg-success">ID</th>
+                <th scope="col" class="bg-success">Primeiro nome</th>
+                <th scope="col" class="bg-success">Último nome</th>
+                <th scope="col" class="bg-success"></th>
+            </tr>
+            </thead>
+            {% for person in persons %}
+                <tbody>
+                <tr>
+                    <th scope="row" class="table-success">{{ person.id }}</th>
+                    <td class="table-success">{{ person.first_name }}</td>
+                    <td class="table-success">{{ person.last_name }}</td>
+                    <td class="table-success"><i class="fas fa-trash-alt"
+                                                 onclick="location.href='{% url 'persons_delete' person.id %}'"></i>
+                        <i class="fas fa-edit" onclick="location.href='{% url 'persons_update' person.id %}'"></i></td>
+
+                </tr>
+
+
+            {% endfor %}
+    </div>
+{% endblock %}

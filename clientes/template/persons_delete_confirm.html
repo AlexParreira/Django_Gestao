@@ -1,16 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h3>Tem certeza que deseja deletar a pessoa abaixo?</h3>
-<form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">DELETE</button>
-    </form>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% load bootstrap %}
+
+{% block title %}page{% endblock %}
+
+{% block main %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="person">
+            <div class="alert alert-danger" role="alert">
+                <h3>Tem certeza que deseja deletar o cliente abaixo?</h3>
+
+            </div>
+        </div>
+        {% csrf_token %}
+        {{ form | bootstrap }}
+        <button type="submit" class="btn btn-danger btn btn-block">Deletar</button>
+
+    </form>
+        <button type="submit" class="btn btn-success btn btn-block" onclick="location.href='{% url 'persons_list' %}'">Voltar</button>
+{% endblock %}
